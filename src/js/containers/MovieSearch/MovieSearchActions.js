@@ -1,10 +1,19 @@
-const rootURL = 'https://omdbapi.com/?t=';
+import axios from 'axios';
+const rootURL = 'https://omdbapi.com/?s=';
+const detailURL = 'https://omdbapi.com/?i=';
 const apikey = '8730e0e';
 
 export function getMovie(movie) {
-    const req = axios.get(`${rootURL}${movie}&apikey=${apikey}`)
+    console.log(movie)
     return {
         type: 'GET_MOVIE',
-        payload: req
+        payload: axios.get(`${rootURL}${movie}&apikey=${apikey}`)
+    }
+}
+
+export function getMovieDetails(movieID) {
+    return {
+        type: 'GET_MOVIE_DETAILS',
+        payload: axios.get(`${detailURL}${movieID}&apikey=${apikey}`)
     }
 }
