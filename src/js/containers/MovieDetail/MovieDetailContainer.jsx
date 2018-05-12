@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getMovieDetails } from "../MovieSearch/MovieSearchActions";
 
 class MovieDetailContainer extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount(){
+      const { dispatch, imdbID } = this.props;
+      dispatch(getMovieDetails( {imdbID} ))
     }
 
     render() {
@@ -27,7 +33,7 @@ class MovieDetailContainer extends React.Component {
               <span className="badge badge-pill badge-primary mr-2"> Released {movie.Search.Year}</span>
               <span className="badge badge-pill badge-primary mr-2">{movie.Search.Runtime}</span>
               <span className="badge badge-pill badge-primary mr-2">{movie.Search.Genre}</span>
-              <p className="mt-3">{movie.Search.Plot}}</p>
+              <p className="mt-3">{movie.Search.Plot}</p>
               <p>{movie.Search.Awards}</p>
 
               <p className="mt-3">
