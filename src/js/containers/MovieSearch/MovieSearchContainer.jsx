@@ -22,7 +22,11 @@ class MovieSearchContainer extends React.Component {
 
   render() {
     const {  movies } = this.props;
-    console.log({movies})
+    console.log("movies in render func")
+    console.log({ movies})
+
+    
+
     return (
       <div className="container">
         <h1 className="pageTitle"> Movie Finder </h1>
@@ -32,7 +36,13 @@ class MovieSearchContainer extends React.Component {
 
         <div className="card w-100">
           {movies &&
-            movies.map(mov => (
+            movies.map(mov => {
+              
+              const to = { 
+                pathname: `/movie/${mov.imdbID}`, 
+                movie: mov
+              };
+              return (
               <div className="row">
                 <div className="col-3">
                   <img className="w-100" src={mov.Poster} />
@@ -42,13 +52,9 @@ class MovieSearchContainer extends React.Component {
                   <h4>{mov.Year}</h4>
                   <hr />
                   <p>
-                    <strong>MOVIE PLOT GOES HERE </strong> {mov.Plot}Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Necessitatibus tempore
-                    architecto expedita ipsa aut eaque illum recusandae sequi?
-                    Vel quaerat nam perferendis labore aperiam nihil ratione ex
-                    sit quisquam doloribus.
+                      {mov.plot}
                   </p>
-                  <Link to={`/movie/${mov.imdbID}`}>
+                  <Link to={to}>
                     <button
                       className="btn btn-primary float-right"
                       onClick={this.handleDetails}
@@ -58,7 +64,8 @@ class MovieSearchContainer extends React.Component {
                   </Link>
                 </div>
               </div>
-            ))}
+            )}
+            )}
         </div>
       </div>
     );

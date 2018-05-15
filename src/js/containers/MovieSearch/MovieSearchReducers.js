@@ -11,10 +11,10 @@ export default function movieSearchReducer(state = defaultState, action) {
         ...state,
         movies: payload
       }
-    case "GET_MOVIE_DETAILS":
+    case "GET_MOVIE_DETAILS_FULFILLED":
       return {
         ...state,
-        movie: playload.data
+        movie: payload.data
         //this need to be corrected...unsure about payload
       };
 

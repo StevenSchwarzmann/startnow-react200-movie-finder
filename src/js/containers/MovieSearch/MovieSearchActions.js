@@ -4,10 +4,23 @@ import regeneratorRuntime from "regenerator-runtime";
 const rootURL = "https://omdbapi.com/?s=";
 const detailURL = "https://omdbapi.com/?i=";
 const apikey = "8730e0e";
+//8730e0e
+//b95c5529
+
+
+export function getAllMoviesFromSearch(movies){
+  return {
+    type: "GET_ALL_MOVIES",
+    payload: movies
+  }
+}
+
+
 
 export function searchMovies(query, dispatch) {
-  
-  axios.get(`${rootURL}${query}&apikey=${apikey}`)
+ const url = `${rootURL}${query}&apikey=${apikey}`
+ console.log({url})
+  axios.get(url)
     .then( async res => {
       let pendingPlots = [];
       let movies = res.data.Search
@@ -18,7 +31,8 @@ export function searchMovies(query, dispatch) {
                   metaScore: res.data.Metascore,
                   releaseDate: res.data.Released,
                   runTime: res.data.Runtime,
-                  rating: res.data.imdbRating}
+                  rating: res.data.imdbRating,
+                  genre: res.data.Genre }
         }) )
       }
       const finalPlots = await axios.all(pendingPlots)
@@ -30,10 +44,10 @@ export function searchMovies(query, dispatch) {
         movies[i].runTime = finalPlots[i].runTime
         movies[i].rating = finalPlots[i].rating
       }
-      return {
-        type: "GET_ALL_MOVIES",
-        payload: movies
-      }
+      console.log({movies})
+      console.log({finalPlots})
+      dispatch( getAllMoviesFromSearch(movies))
+      
     })
     .catch(console.error)
 }
@@ -44,3 +58,10 @@ export function getMovieDetails(imdbID) {
     payload: axios.get(`${detailURL}${imdbID}&apikey=${apikey}`)
   };
 }
+
+export function searchMovies1(query) {
+      return {
+        type: "GET_ALL_MOVIES1",
+        payload: axios.get(`${rootURL}${query}&y=&plot=short&r=json&apikey=${apikey}`)
+      }
+    }
