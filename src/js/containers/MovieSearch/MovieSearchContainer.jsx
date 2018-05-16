@@ -5,13 +5,17 @@ import { Link } from "react-router-dom";
 class MovieSearchContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      text : ""
+    }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
 
   handleSearch = e => {
-    const { dispatch, search } = this.props;
-    searchMovies("birdman", dispatch)
+    const { dispatch, query } = this.props;
+    searchMovies(this.state.text , dispatch)
   };
 
   handleDetails = e => {
@@ -20,18 +24,21 @@ class MovieSearchContainer extends React.Component {
     dispatch(getMovieDetails({ imbdID }));
   };
 
+  handleTextChange = e => {
+    console.log(e.target.value)
+    this.setState({text: e.target.value})
+  };
+
   render() {
     const {  movies } = this.props;
     console.log("movies in render func")
     console.log({ movies})
 
-    
-
     return (
       <div className="container">
         <h1 className="pageTitle"> Movie Finder </h1>
 
-        <input className="userInput" />
+        <input className="userInput" value={this.state.text} onChange={this.handleTextChange} placeholder="Enter Movie title..."/>
         <button onClick={this.handleSearch}>Go!</button>
 
         <div className="card w-100">
