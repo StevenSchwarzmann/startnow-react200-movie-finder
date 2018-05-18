@@ -16,7 +16,6 @@ export function searchMovies(query, dispatch) {
       let pendingPlots = [];
       let movies = res.data.Search;
       for (let movie of movies) {
-        console.log("movies in loop" , movies)
         pendingPlots.push(
           axios
             .get(`${detailURL}${movie.imdbID}&apikey=${apikey}`)
@@ -41,6 +40,7 @@ export function searchMovies(query, dispatch) {
         movies[i].releaseDate = finalPlots[i].releaseDate;
         movies[i].runTime = finalPlots[i].runTime;
         movies[i].rating = finalPlots[i].rating;
+        movies[i].genre = finalPlots[i].genre;
       }
       console.log({ movies });
       console.log({ finalPlots });

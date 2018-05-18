@@ -62,12 +62,13 @@ class MovieSearchContainer extends React.Component {
                     <img className="w-100" src={mov.Poster} />
                   </div>
                   <div className="col-9 p-4">
-                    <h2>{mov.Title}</h2>
-                    <h4>{mov.Year}</h4>
+                    <h2 id="movTitle">{mov.Title}</h2>
+                    <h4 id="movYear">{mov.Year}</h4>
                     <hr />
-                    <p>{mov.plot}</p>
+                    <p id="movPlot">{mov.plot}</p>
                     <Link to={to}>
                       <button
+                        id="moreInfo"
                         className="btn btn-primary float-right"
                         onClick={this.handleDetails}
                       >

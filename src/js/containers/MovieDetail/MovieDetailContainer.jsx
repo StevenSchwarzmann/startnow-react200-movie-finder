@@ -16,7 +16,7 @@ class MovieDetailContainer extends React.Component {
       const { movie } = this.props.location;
       console.log('movieDetailHere', this.props)
         return (
-            <div>
+            <div className="movDetail">
       <h1 className="text-center">{movie.Title}</h1>
       <hr />
       
